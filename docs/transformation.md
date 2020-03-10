@@ -6,8 +6,8 @@ airbnb_df.dtypes.value_counts()
 
 | type    | occurance |
 | ------- | --------- |
-| float64 | 42        |
-| object  | 37        |
+| float64 | 38        |
+| object  | 34        |
 | int32   | 2         |
 
 ## objects
@@ -19,14 +19,12 @@ airbnb_df.dtypes.value_counts()
 | Column | Reason   |
 | ------ | -------- |
 | rowId  | not used |
+| id  | not used |
 
 ### transformed
 
 | Column                           | Transformation |
 | -------------------------------- | -------------- |
-| rowId                            |
-| id                               |
-| experiences_offered              |
 | host_since                       |
 | host_location                    |
 | host_response_time               |
@@ -54,10 +52,8 @@ airbnb_df.dtypes.value_counts()
 | calendar_last_scraped            |
 | first_review                     |
 | last_review                      |
-| requires_license                 |
 | license                          |
 | instant_bookable                 |
-| is_business_travel_ready         |
 | cancellation_policy              |
 | require_guest_profile_picture    |
 | require_guest_phone_verification |
@@ -68,16 +64,15 @@ airbnb_df.dtypes.value_counts()
 
 ### dropped
 
-| Column               | Reason     |
-| -------------------- | ---------- |
-| host_acceptance_rate | mostly NaN |
+| Column | Reason |
+| ------ | ------ |
+| name   | ...    |
 
 ### transformed
 
 | Column                                       | Transformation |
 | -------------------------------------------- | -------------- |
 | host_response_rate                           |
-| host_acceptance_rate                         |
 | host_listings_count                          |
 | host_total_listings_count                    |
 | latitude                                     |
@@ -86,10 +81,7 @@ airbnb_df.dtypes.value_counts()
 | bathrooms                                    |
 | bedrooms                                     |
 | beds                                         |
-| square_feet                                  |
 | price                                        |
-| weekly_price                                 |
-| monthly_price                                |
 | security_deposit                             |
 | cleaning_fee                                 |
 | guests_included                              |
