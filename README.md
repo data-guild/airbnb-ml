@@ -2,6 +2,8 @@
 
 machine learnine on airbnb barcelona data
 
+Inspired by [clean-code-ml](https://github.com/davified/clean-code-ml)
+
 # Environment setup
 
 ### Pre-requisit
