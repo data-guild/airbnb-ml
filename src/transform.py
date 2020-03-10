@@ -1,4 +1,6 @@
+import functools
 import pandas as pd
+
 
 def drop_rows_occurs_less_than(df, columnName, low_bound):
     counts = df[columnName].value_counts()
@@ -9,5 +11,12 @@ def drop_rows_occurs_less_than(df, columnName, low_bound):
 
 def drop_rows_with_values(df, columnName, values):
     new_df = df[~df[columnName].isin(values)]
-    print(new_df)
     return new_df
+
+
+def encode_boolean_to_float(df, columnName):
+    df[columnName] = df[columnName].astype(float)
+    return df
+
+
+

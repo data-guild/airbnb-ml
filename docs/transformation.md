@@ -7,7 +7,7 @@ airbnb_df.dtypes.value_counts()
 | type    | occurance |
 | ------- | --------- |
 | float64 | 38        |
-| object  | 34        |
+| object  | 32        |
 | int32   | 2         |
 
 ## objects
@@ -16,47 +16,38 @@ airbnb_df.dtypes.value_counts()
 
 ### dropped
 
-| Column | Reason   |
-| ------ | -------- |
-| rowId  | not used |
-| id  | not used |
+| Column                 | Reason                                |
+| ---------------------- | ------------------------------------- |
+| rowId                  | not used                              |
+| id                     | not used                              |
+| host_location          | duplicate with longitude and altitude |
+| host_neighbourhood     | too granular                          |
+| street                 | too granular                          |
+| neighbourhood          | too granular                          |
+| neighbourhood_cleansed | too granular                          |
+| market                 | 99.9% same value "Barcelona"          |
+| license                | too granular                          |
 
 ### transformed
 
-| Column                           | Transformation |
-| -------------------------------- | -------------- |
-| host_since                       |
-| host_location                    |
-| host_response_time               |
-| host_is_superhost                |
-| host_neighbourhood               |
-| host_verifications               |
-| host_has_profile_pic             |
-| host_identity_verified           |
-| street                           |
-| neighbourhood                    |
-| neighbourhood_cleansed           |
-| neighbourhood_group_cleansed     |
-| city                             |
-| state                            |
-| zipcode                          |
-| market                           |
-| smart_location                   |
-| is_location_exact                |
-| property_type                    |
-| room_type                        |
-| bed_type                         |
-| amenities                        |
-| calendar_updated                 |
-| has_availability                 |
-| calendar_last_scraped            |
-| first_review                     |
-| last_review                      |
-| license                          |
-| instant_bookable                 |
-| cancellation_policy              |
-| require_guest_profile_picture    |
-| require_guest_phone_verification |
+| Column                       | Transformation                |
+| ---------------------------- | ----------------------------- |
+| host_since                   |
+| host_response_time           |
+| host_is_superhost            | encode_boolean_to_float       |
+| host_verifications           |
+| host_has_profile_pic         | encode_boolean_to_float       |
+| host_identity_verified       | encode_boolean_to_float       |
+| neighbourhood_group_cleansed | encode_category_dic           |
+| zipcode                      | drop_rows_occurs_less_than(7) |
+| property_type                | encode_category_dic           |
+| room_type                    | encode_category_dic           |
+| bed_type                     | encode_category_dic           |
+| amenities                    |
+| calendar_updated             |
+| first_review                 |
+| last_review                  |
+| cancellation_policy          | encode_category_dic           |
 
 ## float64 and int32
 

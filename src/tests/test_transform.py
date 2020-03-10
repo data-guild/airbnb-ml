@@ -26,6 +26,13 @@ class TestProcessing(unittest.TestCase):
         expected_data = {'product': ['banana', 'banana'],
                          'qty': [6, 8]}
         expected_df = pd.DataFrame(expected_data)
-        print(expected_df)
         actual_df = trans.drop_rows_with_values(data_df, 'product', ['apple','berry'])
+        np.array_equal(expected_df.values,actual_df.values)
+
+    def test_encode_boolean_to_float(self):
+        data = {'soldout': [True,False,True]}
+        data_df = pd.DataFrame(data)
+        expected_data = {'soldout': [1.0,0.0,1.1]}
+        expected_df = pd.DataFrame(expected_data)
+        actual_df = trans.encode_boolean_to_float(data_df, 'soldout')
         np.array_equal(expected_df.values,actual_df.values)
