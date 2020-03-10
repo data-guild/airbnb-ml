@@ -20,7 +20,7 @@ pyenv versions
 #     3.7.6  <- this is what we installed
 ```
 
-### Create pyenv and install dependencies
+### Setup
 
 ```
 pyenv_version=3.7.6
@@ -30,7 +30,7 @@ pyenv activate $pyenv_name
 pip install -r requirements.txt
 ```
 
-### Get things running
+### Running stuff
 
 ```bash
 jupyter notebook # start jupyter kernal
