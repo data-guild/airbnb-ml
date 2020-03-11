@@ -33,7 +33,7 @@ airbnb_df.dtypes.value_counts()
 
 | Column                           | Transformation                                                                        |
 | -------------------------------- | ------------------------------------------------------------------------------------- |
-| host_since yyyy-MM-dd            | fillna_with_lowest_occurance                                                          |
+| host_since                       | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | host_response_time               | drop_rows_occurs_less_than(1) ->fillna_with_lowest_occurance ->dic_host_response_time |
 | host_is_superhost                | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
 | host_verifications               | extract_num_of_items_for_column                                                       |
@@ -47,8 +47,8 @@ airbnb_df.dtypes.value_counts()
 | amenities                        | extract_num_of_items_for_column                                                       |
 | has_availability                 | encode_boolean_to_float                                                               |
 | calendar_updated "2 months ago"  |
-| first_review yyyy-MM-dd          | fillna_with_lowest_occurance                                                          |
-| last_review yyyy-MM-dd           | fillna_with_lowest_occurance                                                          |
+| first_review                     | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
+| last_review                      | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | instant_bookable                 | encode_boolean_to_float                                                               |
 | cancellation_policy              | drop_rows_occurs_less_than(2) ->encode_category_dic                                   |
 | require_guest_profile_picture    | encode_boolean_to_float                                                               |
