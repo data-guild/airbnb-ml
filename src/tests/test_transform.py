@@ -72,3 +72,23 @@ class TestProcessing(unittest.TestCase):
         expected_df = pd.DataFrame(expected_data)
         actual_df = trans.extract_num_of_items_for_column(data_df, 'product')
         assert_frame_equal(expected_df, actual_df)
+
+    def test_string_to_timestamp(self):
+        input = "2000-01-01"
+        expected = pd.to_datetime('2000-01-01', format='%Y-%m-%d')
+        actual = trans.string_to_timestamp('%Y-%m-%d')(input)
+        self.assertEqual(expected, actual)
+
+    def test_days_from_date_with_given_date(self):
+        date1 = pd.to_datetime('2020-03-10', format='%Y-%m-%d')
+        days_from_2020_03_11 = trans.days_from_date(
+            compare_date=pd.to_datetime('2020-03-11', format='%Y-%m-%d'))
+        actual = days_from_2020_03_11(date1)
+        self.assertEqual(1, actual)
+
+    def test_days_from_date_with_given_date(self):
+        date1 = pd.to_datetime('2020-03-10', format='%Y-%m-%d')
+        days_from_2020_03_09 = trans.days_from_date(
+            compare_date=pd.to_datetime('2020-03-09', format='%Y-%m-%d'))
+        actual = days_from_2020_03_09(date1)
+        self.assertEqual(-1, actual)
