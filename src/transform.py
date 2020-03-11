@@ -1,4 +1,4 @@
-import functools
+import functools, re
 import pandas as pd
 
 
@@ -28,6 +28,13 @@ def fillna_with_highest_occurance(df, columnName):
     df = df.fillna(value={columnName: df[columnName].value_counts().index[0]})
     return df
 
+def extract_num_of_items(input):
+    input = input.split(",")
+    return len(input)
+
+def extract_num_of_items_for_column(df, columnName):
+    df[columnName] = df[columnName].apply(extract_num_of_items)
+    return df
 
 def encode_category_dic(dataframe):
     def h(dica, columnName):

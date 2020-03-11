@@ -33,10 +33,10 @@ airbnb_df.dtypes.value_counts()
 
 | Column                           | Transformation                                                                        |
 | -------------------------------- | ------------------------------------------------------------------------------------- |
-| host_since  yyyy-MM-dd                     | fillna_with_lowest_occurance                                                          |
+| host_since yyyy-MM-dd            | fillna_with_lowest_occurance                                                          |
 | host_response_time               | drop_rows_occurs_less_than(1) ->fillna_with_lowest_occurance ->dic_host_response_time |
 | host_is_superhost                | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
-| host_verifications               | extract_list_length                                                                   |
+| host_verifications               | extract_num_of_items_for_column                                                       |
 | host_has_profile_pic             | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
 | host_identity_verified           | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
 | neighbourhood_group_cleansed     | encode_category_dic                                                                   |
@@ -44,11 +44,11 @@ airbnb_df.dtypes.value_counts()
 | property_type                    | encode_category_dic                                                                   |
 | room_type                        | encode_category_dic                                                                   |
 | bed_type                         | encode_category_dic                                                                   |
-| amenities                        | extract_list_length                                                                   |
+| amenities                        | extract_num_of_items_for_column                                                       |
 | has_availability                 | encode_boolean_to_float                                                               |
-| calendar_updated                 |
-| first_review                     | fillna_with_lowest_occurance                                                          |
-| last_review                      | fillna_with_lowest_occurance                                                          |
+| calendar_updated "2 months ago"  |
+| first_review yyyy-MM-dd          | fillna_with_lowest_occurance                                                          |
+| last_review yyyy-MM-dd           | fillna_with_lowest_occurance                                                          |
 | instant_bookable                 | encode_boolean_to_float                                                               |
 | cancellation_policy              | drop_rows_occurs_less_than(2) ->encode_category_dic                                   |
 | require_guest_profile_picture    | encode_boolean_to_float                                                               |
