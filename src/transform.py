@@ -19,4 +19,25 @@ def encode_boolean_to_float(df, columnName):
     return df
 
 
+def fillna_with_lowest_occurance(df, columnName):
+    df = df.fillna(value={columnName: df[columnName].value_counts().index[-1]})
+    return df
 
+
+def fillna_with_highest_occurance(df, columnName):
+    df = df.fillna(value={columnName: df[columnName].value_counts().index[0]})
+    return df
+
+
+def encode_category_dic(dataframe):
+    def h(dica, columnName):
+        labels = dataframe[columnName].astype(
+            'category').cat.categories.tolist()
+        encode_dic = {columnName: {k: v for k, v in zip(
+            labels, list(range(1, len(labels)+1)))}}
+        return dict(dica, **encode_dic)
+    return h
+
+
+def foldleft(func, acc, xs):
+    return functools.reduce(func, xs, acc)

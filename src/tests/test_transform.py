@@ -36,3 +36,19 @@ class TestProcessing(unittest.TestCase):
         expected_df = pd.DataFrame(expected_data)
         actual_df = trans.encode_boolean_to_float(data_df, 'soldout')
         np.array_equal(expected_df.values,actual_df.values)
+
+    def test_fillna_with_lowest_occurance(self):
+        data = {'product': [np.NaN,"apple","apple", "pear"], 'color': [np.NaN,"red","red", "white"]}
+        data_df = pd.DataFrame(data)
+        expected_data = {'product': ["pear","apple","apple", "pear"], 'color': [np.NaN,"red","red", "white"]}
+        expected_df = pd.DataFrame(expected_data)
+        actual_df = trans.fillna_with_lowest_occurance(data_df, 'product')
+        assert_frame_equal(expected_df,actual_df)
+
+    def test_fillna_with_highest_occurance(self):
+        data = {'product': [np.NaN,"apple","apple", "pear"], 'color': [np.NaN,"red","red", "white"]}
+        data_df = pd.DataFrame(data)
+        expected_data = {'product': ["apple","apple","apple", "pear"], 'color': [np.NaN,"red","red", "white"]}
+        expected_df = pd.DataFrame(expected_data)
+        actual_df = trans.fillna_with_highest_occurance(data_df, 'product')
+        assert_frame_equal(expected_df,actual_df)

@@ -27,27 +27,32 @@ airbnb_df.dtypes.value_counts()
 | neighbourhood_cleansed | too granular                          |
 | market                 | 99.9% same value "Barcelona"          |
 | license                | too granular                          |
+| zipcode                | 580+ with empty value                 |
 
 ### transformed
 
-| Column                       | Transformation                |
-| ---------------------------- | ----------------------------- |
-| host_since                   |
-| host_response_time           |
-| host_is_superhost            | encode_boolean_to_float       |
-| host_verifications           |
-| host_has_profile_pic         | encode_boolean_to_float       |
-| host_identity_verified       | encode_boolean_to_float       |
-| neighbourhood_group_cleansed | encode_category_dic           |
-| zipcode                      | drop_rows_occurs_less_than(7) |
-| property_type                | encode_category_dic           |
-| room_type                    | encode_category_dic           |
-| bed_type                     | encode_category_dic           |
-| amenities                    |
-| calendar_updated             |
-| first_review                 |
-| last_review                  |
-| cancellation_policy          | encode_category_dic           |
+| Column                           | Transformation                                                                        |
+| -------------------------------- | ------------------------------------------------------------------------------------- |
+| host_since  yyyy-MM-dd                     | fillna_with_lowest_occurance                                                          |
+| host_response_time               | drop_rows_occurs_less_than(1) ->fillna_with_lowest_occurance ->dic_host_response_time |
+| host_is_superhost                | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
+| host_verifications               | extract_list_length                                                                   |
+| host_has_profile_pic             | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
+| host_identity_verified           | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
+| neighbourhood_group_cleansed     | encode_category_dic                                                                   |
+| is_location_exact                | encode_boolean_to_float                                                               |
+| property_type                    | encode_category_dic                                                                   |
+| room_type                        | encode_category_dic                                                                   |
+| bed_type                         | encode_category_dic                                                                   |
+| amenities                        | extract_list_length                                                                   |
+| has_availability                 | encode_boolean_to_float                                                               |
+| calendar_updated                 |
+| first_review                     | fillna_with_lowest_occurance                                                          |
+| last_review                      | fillna_with_lowest_occurance                                                          |
+| instant_bookable                 | encode_boolean_to_float                                                               |
+| cancellation_policy              | drop_rows_occurs_less_than(2) ->encode_category_dic                                   |
+| require_guest_profile_picture    | encode_boolean_to_float                                                               |
+| require_guest_phone_verification | encode_boolean_to_float                                                               |
 
 ## float64 and int32
 
