@@ -50,7 +50,7 @@ airbnb_df.dtypes.value_counts()
 | first_review                     | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | last_review                      | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | instant_bookable                 | encode_boolean_to_float                                                               |
-| cancellation_policy              | drop_rows_occurs_less_than(2) -> encode_category_dic                                   |
+| cancellation_policy              | drop_rows_occurs_less_than(2) -> encode_category_dic                                  |
 | require_guest_profile_picture    | encode_boolean_to_float                                                               |
 | require_guest_phone_verification | encode_boolean_to_float                                                               |
 
@@ -60,15 +60,11 @@ airbnb_df.dtypes.value_counts()
 
 ### dropped
 
-| Column | Reason |
-| ------ | ------ |
-| name   | ...    |
-
 ### transformed
 
-| Column                                       | Transformation |
-| -------------------------------------------- | -------------- |
-| host_response_rate                           |
+| Column                                       | Transformation   |
+| -------------------------------------------- | ---------------- |
+| host_response_rate                           | fillna with mean |
 | host_listings_count                          |
 | host_total_listings_count                    |
 | latitude                                     |
@@ -84,10 +80,6 @@ airbnb_df.dtypes.value_counts()
 | extra_people                                 |
 | minimum_nights                               |
 | maximum_nights                               |
-| minimum_minimum_nights                       |
-| maximum_minimum_nights                       |
-| minimum_maximum_nights                       |
-| maximum_maximum_nights                       |
 | minimum_nights_avg_ntm                       |
 | maximum_nights_avg_ntm                       |
 | availability_30                              |
@@ -107,4 +99,3 @@ airbnb_df.dtypes.value_counts()
 | calculated_host_listings_count_entire_homes  |
 | calculated_host_listings_count_private_rooms |
 | calculated_host_listings_count_shared_rooms  |
-| reviews_per_month                            |
