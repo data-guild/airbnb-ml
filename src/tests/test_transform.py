@@ -92,3 +92,17 @@ class TestProcessing(unittest.TestCase):
             compare_date=pd.to_datetime('2020-03-09', format='%Y-%m-%d'))
         actual = days_from_2020_03_09(date1)
         self.assertEqual(-1, actual)
+
+
+    def test_explode_amenities_string_to_list(self):
+        amenities_raw_string = '  {TV,Internet,"Air conditioning",Kitchen} '
+
+        expected_amenities_list = ['TV','Internet','Air conditioning', 'Kitchen']
+        actual_amenities_list = trans.explode_amenities_string(amenities_raw_string)
+        self.assertListEqual(expected_amenities_list, actual_amenities_list)
+
+    def test_flatten_list_of_lists(self):
+        nested_list = [list([1,2,3]), list([4,5])]
+        expected_list = list([1,2,3,4,5])
+        actual_list = list(trans.flatten(nested_list))
+        self.assertListEqual(expected_list, actual_list)

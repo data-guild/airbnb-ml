@@ -1,5 +1,6 @@
 import functools, re
 import pandas as pd
+import itertools
 
 
 def drop_rows_occurs_less_than(df, column_name, low_bound):
@@ -60,3 +61,10 @@ def encode_category_dic(dataframe):
 
 def foldleft(func, acc, xs):
     return functools.reduce(func, xs, acc)
+
+def explode_amenities_string(amenities):
+    return re.sub('[{}"]', '', amenities.strip()).split(',')
+
+def flatten(list_of_lists):
+    return itertools.chain.from_iterable(list_of_lists)
+
