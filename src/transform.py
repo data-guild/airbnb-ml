@@ -85,6 +85,7 @@ def get_keys_below_threshold(series, threshold):
     return keys_to_remove
 
 
+# utils
 def foldleft(func, acc, xs):
     return functools.reduce(func, xs, acc)
 
