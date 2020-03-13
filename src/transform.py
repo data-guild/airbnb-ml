@@ -1,3 +1,5 @@
+from sklearn.metrics import mean_squared_error
+from sklearn.metrics import r2_score
 import functools
 import re
 import pandas as pd
@@ -85,7 +87,24 @@ def get_keys_below_threshold(series, threshold):
     return keys_to_remove
 
 
+# ml util
+
+
+def compute_mse_r2(_model, x_test, y_test):
+    y_predict = _model.predict(x_test)
+    r2 = r2_score(y_test, y_predict)
+    mse = mean_squared_error(y_test, y_predict)
+    return (r2, mse)
+
+
+def get_best_model(_model, x_train, y_train):
+    grid_search = GridSearchCV(_model, {}, cv=5, scoring=('r2'))
+    _model.fit(x_train, y_train)
+    return grid_search.best_estimator_
+
 # utils
+
+
 def foldleft(func, acc, xs):
     return functools.reduce(func, xs, acc)
 
