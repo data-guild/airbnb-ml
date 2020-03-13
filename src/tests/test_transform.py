@@ -97,8 +97,8 @@ class TestProcessing(unittest.TestCase):
     def test_explode_amenities_string_to_list(self):
         amenities_raw_string = '  {TV,Internet,"Air conditioning",Kitchen} '
 
-        expected_amenities_list = ['TV','Internet','Air conditioning', 'Kitchen']
-        actual_amenities_list = trans.explode_amenities_string(amenities_raw_string)
+        expected_amenities_list = ['tv','internet','air conditioning', 'kitchen']
+        actual_amenities_list = trans.explode_string_to_list(amenities_raw_string, pattern_to_remove='[{}"]')
         self.assertListEqual(expected_amenities_list, actual_amenities_list)
 
     def test_flatten_list_of_lists(self):
