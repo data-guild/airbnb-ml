@@ -36,7 +36,8 @@ class TestProcessing(unittest.TestCase):
         data_df = pd.DataFrame(data)
         expected_data = {'soldout': [1.0, 0.0, 1.1]}
         expected_df = pd.DataFrame(expected_data)
-        actual_df = trans.encode_boolean_to_float(data_df, 'soldout')
+        data_df_boolean_to_float = trans.encode_boolean_to_float(data_df)
+        actual_df = data_df_boolean_to_float('soldout')
         np.array_equal(expected_df.values, actual_df.values)
 
     def test_fillna_with_lowest_occurance(self):
