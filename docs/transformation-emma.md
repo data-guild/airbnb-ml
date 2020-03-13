@@ -16,21 +16,22 @@ airbnb_df.dtypes.value_counts()
 
 ### dropped
 
-| Column                          | Reason                                |
-| ------------------------------- | ------------------------------------- |
-| rowId                           | not used                              |
-| id                              | not used                              |
-| host_location                   | duplicate with longitude and altitude |
-| host_neighbourhood              | too granular                          |
-| street                          | too granular                          |
-| neighbourhood                   | too granular                          |
-| neighbourhood_cleansed          | too granular                          |
-| market                          | 99.9% same value "Barcelona"          |
-| license                         | too granular                          |
-| zipcode                         | 580+ with empty value                 |
-| calendar_updated "2 months ago" | not useful                            |
-| first_review                    | not useful                            |
-| host_since                      | not useful                            |
+| Column                          | Reason                                                              |
+| ------------------------------- | ------------------------------------------------------------------- |
+| rowId                           | not used                                                            |
+| id                              | not used                                                            |
+| host_location                   | duplicate with longitude and altitude                               |
+| host_neighbourhood              | too granular                                                        |
+| street                          | too granular                                                        |
+| neighbourhood                   | too granular                                                        |
+| neighbourhood_cleansed          | too granular                                                        |
+| market                          | 99.9% same value "Barcelona"                                        |
+| license                         | too granular                                                        |
+| zipcode                         | 580+ with empty value                                               |
+| calendar_updated "2 months ago" | not useful                                                          |
+| first_review                    | not useful                                                          |
+| last_revßiew                    | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date |
+| host_since                      | not useful                                                          |
 
 ### transformed
 
@@ -49,7 +50,6 @@ airbnb_df.dtypes.value_counts()
 | bed_type                         | encode_category_dic                                                                   |
 | amenities                        | extract_num_of_items_for_column                                                       |
 | has_availability                 | encode_boolean_to_float                                                               |
-| last_review                      | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | instant_bookable                 | encode_boolean_to_float                                                               |
 | cancellation_policy              | drop_rows_occurs_less_than(2) -> encode_category_dic                                  |
 | require_guest_profile_picture    | encode_boolean_to_float                                                               |

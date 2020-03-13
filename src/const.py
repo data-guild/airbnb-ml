@@ -1,4 +1,4 @@
-drop_cat_columns = [
+dropped_columns = [
     'rowId',
     'id',
     'host_location',
@@ -11,9 +11,8 @@ drop_cat_columns = [
     'zipcode',
     'calendar_updated',
     'first_review',
+    'last_review',
     'host_since',
-]
-drop_num_columns = [
     'host_listings_count',
     'host_total_listings_count',
     'minimum_nights',
