@@ -101,13 +101,16 @@ def get_sig_columns(X, y):
     return X[sig_features]
 
 def drop_columns(df):
-    dropped_columns = ["first_review", "last_review", "has_availability", "market",'rowId','id','host_location','host_neighbourhood','street','neighbourhood','neighbourhood_cleansed','calendar_updated','license', 'amenities','property_type','zipcode','neighbourhood_group_cleansed','host_verifications','host_since','reviews_per_month']
-    return df.drop(dropped_columns, axis=1)
+    dropped_columns = ["first_review", "last_review", "has_availability", "market",'rowId','id','host_location','host_neighbourhood','street','neighbourhood','neighbourhood_cleansed','calendar_updated','license', 'amenities','property_type','zipcode','host_verifications','host_since','reviews_per_month']
+    df = df.drop(dropped_columns, axis=1)
+    return df
 
 def drop_rows(df):
     dropped_cols_rows_df = df.dropna(subset=["bedrooms", "host_listings_count","host_total_listings_count","bathrooms", "beds"])
     dropped_host_response_time = ["ES","el Barri Gòtic"]
     dropped_cols_rows_df = removeRowsWithValues(dropped_cols_rows_df, "host_response_time", dropped_host_response_time)
+    dropped_price = [0.0]
+    dropped_cols_rows_df = removeRowsWithValues(dropped_cols_rows_df, "price", dropped_price)
     return dropped_cols_rows_df
 
 def fill_missing_data(df):
@@ -133,6 +136,7 @@ def one_hot_encoding(df):
     dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['bed_type'], prefix = ['bed_type'])
     dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['room_type'], prefix = ['room_type'])
     dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['cancellation_policy'], prefix = ['cancellation_policy'])
+    dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['neighbourhood_group_cleansed'], prefix = ['neighbourhood_group_cleansed'])
     return dropped_cols_rows_encoding_df
 
 # ml util
