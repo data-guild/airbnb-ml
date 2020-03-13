@@ -29,25 +29,26 @@ airbnb_df.dtypes.value_counts()
 | license                         | too granular                          |
 | zipcode                         | 580+ with empty value                 |
 | calendar_updated "2 months ago" | not useful                            |
+| first_review                    | not useful                            |
+| host_since                      | not useful                            |
 
 ### transformed
 
 | Column                           | Transformation                                                                        |
 | -------------------------------- | ------------------------------------------------------------------------------------- |
-| host_since                       | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
+| host_id                          | none                                                                                  |
 | host_response_time               | drop_rows_occurs_less_than(1) ->fillna_with_lowest_occurance ->dic_host_response_time |
-| host_is_superhost                | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
+| host_is_superhost                | encode_boolean_to_float ->fillna False                                                |
 | host_verifications               | extract_num_of_items_for_column                                                       |
-| host_has_profile_pic             | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
-| host_identity_verified           | encode_boolean_to_float ->fillna_with_lowest_occurance                                |
-| neighbourhood_group_cleansed     | encode_category_dic                                                                   |
+| host_has_profile_pic             | encode_boolean_to_float ->fillna False                                                |
+| host_identity_verified           | encode_boolean_to_float ->fillna False                                                |
+| neighbourhood_group_cleansed     | drop_rows_occurs_less_than(1) ->encode_category_dic                                   |
 | is_location_exact                | encode_boolean_to_float                                                               |
 | property_type                    | encode_category_dic                                                                   |
 | room_type                        | encode_category_dic                                                                   |
 | bed_type                         | encode_category_dic                                                                   |
 | amenities                        | extract_num_of_items_for_column                                                       |
 | has_availability                 | encode_boolean_to_float                                                               |
-| first_review                     | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | last_review                      | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date                   |
 | instant_bookable                 | encode_boolean_to_float                                                               |
 | cancellation_policy              | drop_rows_occurs_less_than(2) -> encode_category_dic                                  |

@@ -18,11 +18,9 @@ def drop_rows_with_values(df, column_name, values):
     return new_df
 
 
-def encode_boolean_to_float(df):
-    def h(column_name):
-        df[column_name] = df[column_name].astype(float)
-        return df
-    return h
+def encode_boolean_to_float(df, column_name):
+    df[column_name] = df[column_name].astype(float)
+    return df
 
 
 def fillna_with_lowest_occurance(df, column_name):
