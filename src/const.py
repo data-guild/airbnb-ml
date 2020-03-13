@@ -1,4 +1,4 @@
-drop_columns = [
+drop_cat_columns = [
     'rowId',
     'id',
     'host_location',
@@ -12,6 +12,18 @@ drop_columns = [
     'calendar_updated',
     'first_review',
     'host_since',
+]
+drop_num_columns = [
+    'host_listings_count',
+    'host_total_listings_count',
+    'minimum_nights',
+    'maximum_nights',
+    'minimum_nights_avg_ntm',
+    'maximum_nights_avg_ntm',
+    'availability_30',
+    'availability_60',
+    'availability_90',
+    'number_of_reviews_ltm',
 ]
 
 boolean_to_float_cols = [

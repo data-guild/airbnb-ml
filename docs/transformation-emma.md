@@ -61,6 +61,19 @@ airbnb_df.dtypes.value_counts()
 
 ### dropped
 
+| Column                    | Transformation       |
+| ------------------------- | -------------------- |
+| host_listings_count       | no use               |
+| host_total_listings_count | no use               |
+| minimum_nights            | no use               |
+| maximum_nights            | no use               |
+| minimum_nights_avg_ntm    | no use               |
+| maximum_nights_avg_ntm    | no use               |
+| availability_30           | dup availability_365 |
+| availability_60           | dup availability_365 |
+| availability_90           | dup availability_365 |
+| number_of_reviews_ltm     | no use               |
+
 ### transformed
 
 | Column                                       | Transformation   |
@@ -79,16 +92,8 @@ airbnb_df.dtypes.value_counts()
 | cleaning_fee                                 |
 | guests_included                              |
 | extra_people                                 |
-| minimum_nights                               |
-| maximum_nights                               |
-| minimum_nights_avg_ntm                       |
-| maximum_nights_avg_ntm                       |
-| availability_30                              |
-| availability_60                              |
-| availability_90                              |
 | availability_365                             |
 | number_of_reviews                            |
-| number_of_reviews_ltm                        |
 | review_scores_rating                         |
 | review_scores_accuracy                       |
 | review_scores_cleanliness                    |
@@ -100,3 +105,4 @@ airbnb_df.dtypes.value_counts()
 | calculated_host_listings_count_entire_homes  |
 | calculated_host_listings_count_private_rooms |
 | calculated_host_listings_count_shared_rooms  |
+| review_per_month                             |
