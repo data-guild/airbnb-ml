@@ -86,6 +86,54 @@ def get_keys_below_threshold(series, threshold):
 
     return keys_to_remove
 
+# cindy
+def removeRowsWithValues(df , col, values):
+    return df[~df[col].isin(values)]
+
+import statsmodels.api as sm
+
+def get_sig_columns(X, y):
+    estimator = sm.OLS(y, X)
+    smodel=estimator.fit()
+    smodel.summary()
+    smodel.pvalues
+    sig_features = [f for f, p in zip(X.columns, smodel.pvalues) if p < 0.05]
+    return X[sig_features]
+
+def drop_columns(df):
+    dropped_columns = ["first_review", "last_review", "has_availability", "market",'rowId','id','host_location','host_neighbourhood','street','neighbourhood','neighbourhood_cleansed','calendar_updated','license', 'amenities','property_type','zipcode','neighbourhood_group_cleansed','host_verifications','host_since','reviews_per_month']
+    return df.drop(dropped_columns, axis=1)
+
+def drop_rows(df):
+    dropped_cols_rows_df = df.dropna(subset=["bedrooms", "host_listings_count","host_total_listings_count","bathrooms", "beds"])
+    dropped_host_response_time = ["ES","el Barri Gòtic"]
+    dropped_cols_rows_df = removeRowsWithValues(dropped_cols_rows_df, "host_response_time", dropped_host_response_time)
+    return dropped_cols_rows_df
+
+def fill_missing_data(df):
+    values = {'security_deposit': 0, 'cleaning_fee': 0, "host_response_time":"N/A", "host_response_rate": 0, "host_has_profile_pic": 0, "host_identity_verified": 0, "host_is_superhost": 0}
+    return df.fillna(value=values)
+
+def convert_boolean_to_float(df):
+    cols = ["host_has_profile_pic","host_identity_verified", "host_is_superhost", "is_location_exact", "instant_bookable", "require_guest_profile_picture", "require_guest_phone_verification"]
+    for col in cols:
+        df[col] = pd.to_numeric(df[col]).astype('int64')
+    return df
+
+import numpy as np
+from sklearn.impute import SimpleImputer
+def fill_missing_data_with_mean(df):
+    cols_filled_with_nums = ["review_scores_rating","review_scores_accuracy","review_scores_cleanliness","review_scores_checkin","review_scores_communication","review_scores_location","review_scores_value"]
+    imp = SimpleImputer(missing_values=np.nan, strategy='mean')
+    df[cols_filled_with_nums] = imp.fit_transform(df[cols_filled_with_nums])
+    return df
+
+def one_hot_encoding(df):
+    dropped_cols_rows_encoding_df = pd.get_dummies(df, columns=['host_response_time'], prefix = ['host_response_time'])
+    dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['bed_type'], prefix = ['bed_type'])
+    dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['room_type'], prefix = ['room_type'])
+    dropped_cols_rows_encoding_df = pd.get_dummies(dropped_cols_rows_encoding_df, columns=['cancellation_policy'], prefix = ['cancellation_policy'])
+    return dropped_cols_rows_encoding_df
 
 # ml util
 
