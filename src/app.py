@@ -15,16 +15,16 @@ with s3.open('airbnb-barcelona/models/rnd_reg.price', 'rb') as f:
 def hello_world():
     return jsonify({"response": "hello from airbnb-ml for barcelona!"})
 
-# @app.route('/predict', methods=['POST'])
-# def predict():
-#     request_payload = request.json
+@app.route('/predict', methods=['POST'])
+def predict():
+    request_payload = request.json
 #     input_features = pd.DataFrame([], columns=column_order)
 #     input_features = input_features.append(request_payload, ignore_index=True)
 #     input_features = input_features.fillna(0)
 
-#     prediction = model.predict(input_features.values.tolist()).tolist()[0]
+    prediction = loaded_model.predict(input_features.values.tolist()).tolist()[0]
 
-#     return jsonify({'predicted price (thousands)': prediction})
+    return jsonify({'predicted price (thousands)': prediction})
 
 if __name__ == '__main__':
     # import settings
