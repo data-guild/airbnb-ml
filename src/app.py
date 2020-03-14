@@ -1,11 +1,12 @@
-import os
 import json
-import re
-
 import joblib
+import os
 import pandas as pd
-import s3fs
+import re
+import
+
 from flask import Flask, jsonify, request
+
 import const
 
 app = Flask(__name__)
@@ -21,7 +22,7 @@ def hello_world():
     return jsonify({"response": "hello from airbnb-ml for barcelona!"})
 
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict_price', methods=['POST'])
 def predict():
     request_payload = request.json
     input_features = pd.DataFrame([], columns=column_order)
@@ -32,8 +33,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    # import settings
-    # if settings.PORT == 8080:
-    app.run(port=8080, host='0.0.0.0', debug=True)
-    # else:
-    # app.run()
+    app.run(debug=True, host='0.0.0.0')

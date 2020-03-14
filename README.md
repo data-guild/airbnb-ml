@@ -22,7 +22,7 @@ pyenv versions
 #     3.7.6  <- this is what we installed
 ```
 
-### Setup
+### Setup on local machine
 
 ```
 pyenv_version=3.7.6
@@ -32,11 +32,18 @@ pyenv activate $pyenv_name
 pip install -r requirements.txt
 ```
 
-### Running stuff
+### Running on local machine
 
 ```bash
 jupyter notebook # start jupyter kernal
 
 nosetests # single run
 nosetests --with-watch --rednose --nologcapture # run in watch mode with color
+```
+
+### Package flask app into docker
+As the application obtains the model from S3, you should have **AWS_ACCESS_KEY_ID** and **AWS_SECRET_ACCESS_KEY** when running locally
+```
+docker build -t airbnb_barcelona_ml:latest .
+docker run -e AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY> -p 5000:5000 -d airbnb_barcelona_ml
 ```
