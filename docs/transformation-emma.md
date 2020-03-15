@@ -1,37 +1,6 @@
-# columns in valid parquet files
-
-```
-airbnb_df.dtypes.value_counts()
-```
-
-| type    | occurance |
-| ------- | --------- |
-| float64 | 38        |
-| object  | 32        |
-| int32   | 2         |
-
-## objects
+## object columns
 
 `cat_df = airbnb_df.select_dtypes(include=['object']).copy()`
-
-### dropped
-
-| Column                          | Reason                                                              |
-| ------------------------------- | ------------------------------------------------------------------- |
-| rowId                           | not used                                                            |
-| id                              | not used                                                            |
-| host_location                   | duplicate with longitude and altitude                               |
-| host_neighbourhood              | too granular                                                        |
-| street                          | too granular                                                        |
-| neighbourhood                   | too granular                                                        |
-| neighbourhood_cleansed          | too granular                                                        |
-| market                          | 99.9% same value "Barcelona"                                        |
-| license                         | too granular                                                        |
-| zipcode                         | 580+ with empty value                                               |
-| calendar_updated "2 months ago" | not useful                                                          |
-| first_review                    | not useful                                                          |
-| last_revßiew                    | fillna_with_lowest_occurance ->string_to_timestamp ->days_from_date |
-| host_since                      | not useful                                                          |
 
 ### transformed
 
@@ -59,28 +28,11 @@ airbnb_df.dtypes.value_counts()
 
 `numeric_df = airbnb_df.select_dtypes(include=['float64', 'int32']).copy()`
 
-### dropped
-
-| Column                    | Transformation       |
-| ------------------------- | -------------------- |
-| host_listings_count       | no use               |
-| host_total_listings_count | no use               |
-| minimum_nights            | no use               |
-| maximum_nights            | no use               |
-| minimum_nights_avg_ntm    | no use               |
-| maximum_nights_avg_ntm    | no use               |
-| availability_30           | dup availability_365 |
-| availability_60           | dup availability_365 |
-| availability_90           | dup availability_365 |
-| number_of_reviews_ltm     | no use               |
-
 ### transformed
 
 | Column                                       | Transformation   |
 | -------------------------------------------- | ---------------- |
 | host_response_rate                           | fillna with mean |
-| host_listings_count                          |
-| host_total_listings_count                    |
 | latitude                                     |
 | longitude                                    |
 | accommodates                                 |
